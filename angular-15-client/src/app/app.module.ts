@@ -6,11 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
+import { UserService } from './services/user.service';
+import { LoginComponent } from './auth/login/login.component';
+// import { SignUpComponent } from './auth/signin/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TutorialsListComponent
+    TutorialsListComponent,
+    LoginComponent,
+    // SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +23,7 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
