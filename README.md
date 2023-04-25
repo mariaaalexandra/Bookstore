@@ -5,8 +5,6 @@ Full-stack Angular 15 + Spring Boot Tutorial CRUD Application in that:
 - We can create, retrieve, update, delete Tutorials.
 - We can also find Tutorials by title.
 
-![spring-boot-angular-15-example-crud.png](spring-boot-angular-15-example-crud.png)
-
 > [Spring Boot + Angular 15 CRUD example](https://www.bezkoder.com/spring-boot-angular-15-crud/)
 
 Run both Back-end & Front-end in one place:
