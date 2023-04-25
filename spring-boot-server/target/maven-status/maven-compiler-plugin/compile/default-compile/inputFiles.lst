@@ -1,0 +1,4 @@
+/mnt/d/Bookstore/Bookstore/spring-boot-server/src/main/java/com/bezkoder/spring/jpa/h2/SpringBootJpaH2Application.java
+/mnt/d/Bookstore/Bookstore/spring-boot-server/src/main/java/com/bezkoder/spring/jpa/h2/controller/TutorialController.java
+/mnt/d/Bookstore/Bookstore/spring-boot-server/src/main/java/com/bezkoder/spring/jpa/h2/model/Tutorial.java
+/mnt/d/Bookstore/Bookstore/spring-boot-server/src/main/java/com/bezkoder/spring/jpa/h2/repository/TutorialRepository.java

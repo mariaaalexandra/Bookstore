@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "./../../services/user.service";
+import { HttpClient } from "@angular/common/http";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -7,7 +8,7 @@ import { UserService } from "./../../services/user.service";
 })
 export class LoginComponent implements OnInit {
   userData: any;
-  constructor(private user: UserService) {}
+  constructor(private user: UserService, private http: HttpClient) {}
 
   ngOnInit() {
     this.user.currentUserData.subscribe((userData: any) => (this.userData = userData));
@@ -19,5 +20,16 @@ export class LoginComponent implements OnInit {
   }
   login(data: any) {
     this.user.changeData(data);
+  }
+  
+  onLogin(userData: { username: string, password: string }) {
+    console.log(userData);
+
+    this.http.post('http://localhost:8080/api/auth/signin' , userData)
+    .subscribe((res) => {
+      console.log(res);
+    });
+    
+    
   }
 }
