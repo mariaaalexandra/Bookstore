@@ -20,7 +20,6 @@ export class SignUpComponent {
 
 
   onSignUp(userData: { username: string, email: string, password: string }) {
-  console.log(userData);
 
   this.http.post('http://localhost:8080/api/auth/signup', userData)
     .subscribe((res) => {
