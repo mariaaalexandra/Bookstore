@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BookService } from './services/book.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
      SignUpComponent,
      RefreshComponent,
      DashboardComponent,
-     BookListComponent
+     BookListComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {BookService} from '../../services/book.service';
-import {AppConst} from '../../constants/app.const';
-import {Book} from '../../models/Book';
-// import {Subject} from 'rxjs/Subject';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../services/book.service';
+import { AppConst } from '../../constants/app.const';
+import { Book } from '../../models/Book';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-book-list',
@@ -12,38 +13,33 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class BookListComponent implements OnInit {
 
-  public serverPath = AppConst.serverPath;
-  public bookList: Book[] | undefined;
-  public selectedBook: Book | undefined;
-  // // dtTrigger: Subject<any> = new Subject();
+  private serverPath = AppConst.serverPath;
+  public bookList: Book[] = [];
+  private selectedBook: Book | undefined;
+  dtTrigger: Subject<any> = new Subject();
 
 
-  // constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
-  // onSelect(book: Book) {
-  //   this.selectedBook = book;
-  //   this.router.navigate(['viewBook', this.selectedBook.id]);
-  // }
-
-  ngOnInit() {
-    // this.route.queryParams.subscribe( params => {
-    //   if (params['bookList']) {
-    //     this.bookList = JSON.parse(params['bookList']);
-    //   } else {
-    //     this.bookService.getBookList().subscribe(
-    //       res => {
-    //         console.log(res);
-    //         this.bookList = res;
-    //         // this.dtTrigger.next();
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       }
-    //     );
-    //   }
-    //   }
-    // );
+  onSelect(book: Book) {
+    this.selectedBook = book;
+    this.router.navigate(['viewBook', this.selectedBook.id]);
   }
 
+  ngOnInit() {
+    console.log("MIU");
+    this.http.get<Book[]>('http://localhost:8080/book/bookList')
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.bookList = res;
+          this.dtTrigger.next(this.bookList);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
+  
 
 }

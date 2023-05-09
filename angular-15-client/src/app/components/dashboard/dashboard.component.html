@@ -5,7 +5,7 @@
       <img src="../../../assets/image/logo.png" class="rounded float-left" style="padding: 0%; z-index:1;" />
     </div>
   </div>
-
+  <a [routerLink]="['/bookList']" class="btn btn-primary">Books</a>
   <div class="row" style="margin-top: 30px">
     <div class="col-4">
       <div class="card">
@@ -37,7 +37,9 @@
   </div>
 
   <div>
-    <div class="home-headline" style="margin-top: 20px"><span>Featured Books</span></div>
+    <div class="home-headline" style="margin-top: 20px"><span  [routerLink]="['/bookList']">Featured Books</span>
+      <!-- <a [routerLink]="['/bookList']" class="btn btn-primary">Books</a> -->
+  </div>
     <hr style="margin-top: -15px;" />
   </div>
 
