@@ -24,23 +24,21 @@ export class LoginComponent implements OnInit {
     this.user.changeData(data);
   }
   
-  onLogin(userData: { username: string, password: string }) {
-
-
-    this.http.post('http://localhost:8080/api/auth/signin' , userData)
+  onLogin(userData: { username: string, password: string, roles: string[] }) {
+    this.http.post('http://localhost:8080/api/auth/signin', userData)
     .subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         // Navigate to the dashboard route after successful login
-        this.router.navigate(['/dashboard']);
+        if (res.roles && res.roles.includes("ROLE_USER"))
+          this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.log(error);
         // Handle error, e.g., show an error message to the user
       }
     });
-    
-    
   }
+  
   
 }

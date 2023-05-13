@@ -13,7 +13,7 @@ export class BookService {
 
 
     getBookList(): Observable<Book[]> {
-      let url = "localhost:8080/book/bookList";
+      let url = "http://localhost:8080/book/bookList";
     
       let headers = new HttpHeaders({
         'Content-Type' : 'application/json',
@@ -24,7 +24,7 @@ export class BookService {
     }
 
     getBook(bookId: number) {
-      let url = this.serverPath+"/book/"+bookId;
+      let url =  "http://localhost:8080/book/"+bookId;
 
       let headers = new HttpHeaders({
         'Content-Type' : 'application/json',
@@ -34,15 +34,22 @@ export class BookService {
       return this.http.get<Book>(url, {headers, responseType: 'json'});
     }
 
-  search(keyword: string) {
-    let url = this.serverPath+"/book/search";
+search(keyword: string) {
+  let url = "http://localhost:8080/book/search";
 
-    let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
-      // 'x-auth-token' : localStorage.getItem('xAuthToken')
-    });
+  let headers = new HttpHeaders({
+    'Content-Type' : 'application/json',
+    // 'x-auth-token' : localStorage.getItem('xAuthToken')
+  });
 
-    return this.http.post<Book []>(url, keyword, {headers, responseType: 'json'});
-  }
+  return this.http.post<Book []>(url, keyword, {headers, responseType: 'json'});
+}
+
+
+filterByCategory(category: string): Observable<Book[]> {
+  // This URL will depend on your API.
+  const url = `http://localhost:8080/book/books?category=${category}`;
+  return this.http.get<Book[]>(url);
+}
 
 }

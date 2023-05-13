@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { AppConst } from '../../constants/app.const';
 import { Book } from '../../models/Book';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
 
@@ -16,7 +16,9 @@ export class BookListComponent implements OnInit {
   private serverPath = AppConst.serverPath;
   public bookList: Book[] = [];
   private selectedBook: Book | undefined;
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<void> = new Subject<void>();
+  public keyword: string = "";
+  public category: string = "";
 
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
@@ -26,19 +28,61 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['viewBook', this.selectedBook.id]);
   }
 
+  onSearchByTitle() {
+    this.bookService.search(this.keyword).subscribe(
+      res => {
+        this.bookList = res;
+        console.log(res);
+        const navigationExtras: NavigationExtras ={
+          queryParams: {
+            "bookList": JSON.stringify(this.bookList)
+          }
+        };
+        this.router.navigate(['/bookList'], navigationExtras);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  onFilterByCategory() {
+    this.bookService.filterByCategory(this.category).subscribe(
+      res => {
+        this.bookList = res;
+        console.log(res);
+        const navigationExtras: NavigationExtras ={
+          queryParams: {
+            "bookList": JSON.stringify(this.bookList)
+          }
+        };
+        this.router.navigate(['/bookList'], navigationExtras);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
   ngOnInit() {
-    console.log("MIU");
-    this.http.get<Book[]>('http://localhost:8080/book/bookList')
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.bookList = res;
-          this.dtTrigger.next(this.bookList);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+    this.route.queryParams.subscribe( params => {
+      if (params['bookList']) {
+        this.bookList = JSON.parse(params['bookList']);
+      } else {
+        this.bookService.getBookList().subscribe(
+          res => {
+            console.log(res);
+            this.bookList = res;
+            this.dtTrigger.next();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+      }
+    );
   }
   
 

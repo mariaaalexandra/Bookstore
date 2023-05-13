@@ -10,7 +10,7 @@ public class Book implements Serializable {
     public static final long serialVervionUID = 68548L;
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String title;

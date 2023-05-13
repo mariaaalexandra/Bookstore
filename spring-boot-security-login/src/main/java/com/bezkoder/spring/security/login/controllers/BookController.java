@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book")
+@CrossOrigin(origins = "http://localhost:8081")
 public class BookController {
 
     @Autowired
@@ -29,6 +30,12 @@ public class BookController {
     public Book addBook(@RequestBody Book book) {
       return  bookService.save(book);
     }
+
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public List<Book> getBooksByCategory(@RequestParam("category") String category) {
+        return bookService.getBooksByCategory(category);
+    }
+
 
     @RequestMapping(value = "/add/image", method = RequestMethod.POST)
     public ResponseEntity uploadImage(@RequestParam("id") int id, HttpServletResponse response, HttpServletRequest request) {
@@ -97,7 +104,7 @@ public class BookController {
 //        Files.delete(Paths.get("src/main/resources/static/image/book/"+ fileName));
         return new ResponseEntity("Remove Success!", HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public List<Book> searchByTitle(@RequestBody String keyword) {
         List<Book> bookList = bookService.searchByTitle(keyword);

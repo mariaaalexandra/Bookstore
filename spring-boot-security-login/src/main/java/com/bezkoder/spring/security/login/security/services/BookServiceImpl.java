@@ -5,6 +5,7 @@ import com.bezkoder.spring.security.login.models.Book;
 import com.bezkoder.spring.security.login.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
@@ -43,16 +44,20 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> searchByTitle(String title) {
         List<Book> bookList = bookRepository.findByTitleContaining(title);
-
+        System.out.println("title " + title);
         List<Book> activeBookList = new ArrayList<>();
         for (Book book: bookList){
             if (book.isActive()){
+                System.out.println("DA");
                 activeBookList.add(book);
             }
         }
         return activeBookList;
     }
 
+    public List<Book> getBooksByCategory(@RequestParam("category") String category) {
+        return bookRepository.findByCategory(category);
+    }
 
     @Override
     public void removeOne(int id) {

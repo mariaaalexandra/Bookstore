@@ -10,5 +10,5 @@ export class Book {
   public ourPrice: number | undefined;
   public active: boolean | undefined;
   public description: string | undefined;
-  public inStockNumber: number | undefined;
+  public inStockNumber: number = -1;
 }

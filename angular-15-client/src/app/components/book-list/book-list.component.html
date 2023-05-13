@@ -6,6 +6,17 @@
     </div>
   </div>
 
+  <form (ngSubmit)="onSearchByTitle()" class="form-inline">
+    <div class="form-group">
+      <input type="text" name="searcyByTitle" [(ngModel)]="keyword" class="form-control" placeholder="Book Title" />
+    </div>
+    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+  </form>
+
+  <button (click)="onFilterByCategory()">Filter by category</button>
+  <input [(ngModel)]="category" placeholder="Enter category">
+
+
   <div class="row" style="margin-top: 30px;">
     <div class="col-md-3"></div>
     <div class="col-md-9">

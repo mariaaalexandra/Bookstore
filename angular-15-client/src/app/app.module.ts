@@ -13,10 +13,13 @@ import { RefreshComponent } from './refresh/refresh.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 const routes: Routes = [
   // ... other routes
   { path: 'dashboard', component: DashboardComponent },
 ];
+import { ViewBookComponent } from './components/view-book/view-book.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +29,10 @@ const routes: Routes = [
      RefreshComponent,
      DashboardComponent,
      BookListComponent,
+     ViewBookComponent,
+     NavBarComponent,
+     ShoppingCartComponent,
+      // UserShippingComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,10 +2,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 @import url('../node_modules/simple-keyboard/build/css/index.css');
 
-body{
-  
-  background-color: brown;
-}
+
 .auth-card{
   background: #c31432;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
