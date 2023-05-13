@@ -27,7 +27,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor = "let book of bookList">
+          <label for="sort">Sort by Price: </label>
+          <label for="sort">Sort by: </label>
+          <select id="sort" (change)="onSortChange($event)">
+            <option value="" selected>Select Option</option>
+            <option value="ourPrice,asc">Price Ascending</option>
+            <option value="ourPrice,desc">Price Descending</option>
+            <option value="id,asc">ID Ascending</option>
+            <option value="id,desc">ID Descending</option>
+            <option value="title,asc">Title Alphabetically</option>
+          </select>
+          <tr *ngFor = "let book of bookList">
           <td>
             <div class="row" style="margin-bottom: 30px;">
               <div class="col-md-3">

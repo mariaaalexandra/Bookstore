@@ -19,7 +19,8 @@ export class BookListComponent implements OnInit {
   dtTrigger: Subject<void> = new Subject<void>();
   public keyword: string = "";
   public category: string = "";
-
+  sortDirection: string = 'asc';  // set initial sort direction
+  sortProperties: string[] = [];
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
@@ -66,24 +67,46 @@ export class BookListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.queryParams.subscribe( params => {
-      if (params['bookList']) {
-        this.bookList = JSON.parse(params['bookList']);
-      } else {
-        this.bookService.getBookList().subscribe(
-          res => {
-            console.log(res);
-            this.bookList = res;
-            this.dtTrigger.next();
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-      }
-    );
+    // this.route.queryParams.subscribe( params => {
+    //   if (params['bookList']) {
+    //     this.bookList = JSON.parse(params['bookList']);
+    //   } else {
+    //     this.bookService.getBookList().subscribe(
+    //       res => {
+    //         console.log(res);
+    //         this.bookList = res;
+    //         this.dtTrigger.next();
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   }
+    //   }
+    // );
+    this.getSortedBooks();
   }
   
 
+  getSortedBooks() {
+    const sortParameters = this.sortProperties.join(',');
+    this.bookService.getSortedBooks(sortParameters).subscribe(
+      data => {
+        this.bookList = data;
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            "bookList": JSON.stringify(this.bookList)
+          }
+        };
+        this.router.navigate(['/bookList'], navigationExtras);
+      },
+      error => console.log(error)
+    );
+  }
+
+onSortChange(event: any) {
+    const value = event.target.value;
+    this.sortProperties = value ? value.split(',') : [];
+    this.getSortedBooks();
+}
 }

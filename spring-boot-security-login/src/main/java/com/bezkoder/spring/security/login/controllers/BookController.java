@@ -36,6 +36,13 @@ public class BookController {
         return bookService.getBooksByCategory(category);
     }
 
+    @GetMapping("/sort")
+    public ResponseEntity<List<Book>> getBooksSorted(@RequestParam("sort") String sortParam) {
+        List<Book> books = bookService.getBooksSorted(sortParam);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+
 
     @RequestMapping(value = "/add/image", method = RequestMethod.POST)
     public ResponseEntity uploadImage(@RequestParam("id") int id, HttpServletResponse response, HttpServletRequest request) {

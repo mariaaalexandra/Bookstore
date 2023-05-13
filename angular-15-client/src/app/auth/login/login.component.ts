@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     var msg = event.target.value;
     this.user.changeData(msg);
   }
+  
   login(data: any) {
     this.user.changeData(data);
   }

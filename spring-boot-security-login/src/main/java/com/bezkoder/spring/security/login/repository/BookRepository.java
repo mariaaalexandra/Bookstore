@@ -2,6 +2,7 @@ package com.bezkoder.spring.security.login.repository;
 
 
 import com.bezkoder.spring.security.login.models.Book;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -12,4 +13,5 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     List<Book> findByCategory(String category);
 
+    List<Book> findAll(Sort sort);
 }

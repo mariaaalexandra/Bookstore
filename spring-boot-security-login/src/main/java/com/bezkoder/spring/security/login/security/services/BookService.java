@@ -14,4 +14,8 @@ public interface BookService {
     void removeOne(int id);
 
     List<Book> getBooksByCategory(String category);
+
+    List<Book> getBooksSortedByPrice(String direction);
+
+    List<Book> getBooksSorted(String sortProperties);
 }

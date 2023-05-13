@@ -121,6 +121,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/test/**").permitAll()
             .antMatchers(h2ConsolePath + "/**").permitAll()
             .antMatchers("/book/**").permitAll()
+            .antMatchers("/books/**").permitAll()
+            .antMatchers("/sort").permitAll()
             .anyRequest().authenticated();
 
     http.headers().frameOptions().sameOrigin();
