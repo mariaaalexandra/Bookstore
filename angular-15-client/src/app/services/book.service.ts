@@ -52,12 +52,6 @@ export class BookService {
     return this.http.get<Book[]>(url);
   }
 
-  // getSortedBooks(direction: string): Observable<Book[]> {
-  //   // This URL will depend on your API.
-  //   const url = `http://localhost:8080/book/sort?direction=${direction}`;
-  //   return this.http.get<Book[]>(url);
-  // }
-
   private baseUrl = 'http://localhost:8080/book';
 
   getSortedBooks(sortProperties: string): Observable<Book[]> {

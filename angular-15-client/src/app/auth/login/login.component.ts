@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
         // Navigate to the dashboard route after successful login
         if (res.roles && res.roles.includes("ROLE_USER"))
           this.router.navigate(['/dashboard']);
+        else 
+          this.router.navigate(['/admin']);
+
       },
       error: (error) => {
         console.log(error);

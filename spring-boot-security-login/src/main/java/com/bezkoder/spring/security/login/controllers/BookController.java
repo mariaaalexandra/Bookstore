@@ -48,15 +48,22 @@ public class BookController {
     public ResponseEntity uploadImage(@RequestParam("id") int id, HttpServletResponse response, HttpServletRequest request) {
         try {
         Book book = bookService.findOne(id);
+        System.out.println(book);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Iterator<String> it = multipartRequest.getFileNames();
         MultipartFile multipartFile = multipartRequest.getFile(it.next());
-        String fileName = id+".png";
+        String fileName = id+".jpg";
 
         byte[] bytes = multipartFile.getBytes();
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/book/"+ fileName)));
         stream.write(bytes);
         stream.close();
+
+            // Additional path
+        String additionalPath = "../../../../../../../../../../angular-15-client/src/assets/image/"; // Set this to your new path
+        BufferedOutputStream stream2 = new BufferedOutputStream(new FileOutputStream(new File("../angular-15-client/src/assets/image/book" + fileName)));
+        stream2.write(bytes);
+        stream2.close();
             return new ResponseEntity("Upload Success!", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
