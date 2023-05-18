@@ -1,20 +1,34 @@
+<body>
 <div class="container">
   <div class="row">
-    <div class="col-12" style="background-image: url(../../../assets/image/wood.png);">
+    <div class="col-12 px-0" style="background-image: url(../../../assets/image/wood.png);">
       <h2 class="section-headline"><span>Book List</span></h2>
       <img src="../../../assets/image/logo.png" class="rounded float-left" style="padding: 0%; z-index:1;" />
     </div>
   </div>
-
-  <form (ngSubmit)="onSearchByTitle()" class="form-inline">
-    <div class="form-group">
-      <input type="text" name="searcyByTitle" [(ngModel)]="keyword" class="form-control" placeholder="Book Title" />
+  
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-between px-0">
+      <div class="col-md-6 px-0 custom-class">
+        <form (ngSubmit)="onSearchByTitle()" class="form-inline w-100 ml-n5">
+          <div class="form-group w-100">
+            <input type="text" name="searcyByTitle" [(ngModel)]="keyword" class="form-control w-75" placeholder="Book Title" />
+            <button type="submit" class="btn btn-outline-success">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="d-flex justify-content-end px-0 custom-class-right">
+        <button (click)="onFilterByCategory()">Filter by category</button>
+        <input [(ngModel)]="category" placeholder="Enter category">
+        <button type="button" class="btn btn-success">Button 3</button>
+      </div>
     </div>
-    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-  </form>
+  </div>
+  
 
-  <button (click)="onFilterByCategory()">Filter by category</button>
-  <input [(ngModel)]="category" placeholder="Enter category">
+
+  <!-- <button (click)="onFilterByCategory()">Filter by category</button>
+  <input [(ngModel)]="category" placeholder="Enter category"> -->
 
 
   <div class="row" style="margin-top: 30px;">
@@ -63,4 +77,4 @@
     </div>
   </div>
 </div>
-
+</body>

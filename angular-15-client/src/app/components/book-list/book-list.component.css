@@ -1,0 +1,11 @@
+body {
+    background-color: #ffc6e1; /* replace with your desired color */
+}
+.custom-class {
+    margin-left: -15px; /* or any other specific value that you need */
+}
+
+.custom-class-right {
+    margin-right: -15px; /* or any other specific value that you need */
+}
+

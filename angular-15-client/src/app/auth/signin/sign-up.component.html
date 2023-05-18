@@ -1,37 +1,34 @@
-<div class="row">
-    <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
-      <div class="card auth">
-        <div class="card-body auth-card">
-          <div class="auth-avatar">
-            <img src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png" alt="user" class="user-image">
-          </div>
-          <form (ngSubmit)="onSignUp(userData)">
-              <div class="form-group">
-                <label for="username">userName </label>
-                <input type="text" name="username" class="form-control" placeholder="username" [(ngModel)]="userData.username">
-              </div>
-              <div class="form-group">
-                <label for="email">Email : </label>
-                <input type="text" name="email" class="form-control" placeholder="Email" [(ngModel)]="userData.email">
-              </div>
-              <div class="form-group">
-                <label for="password">Password : </label>
-                <input type="password" name="password" class="form-control" placeholder="********" [(ngModel)]="userData.password">
-              </div>
-              <div class="form-group">
-                <label for="c_password">Confirm Password : </label>
-                <input type="password" name="c_password" class="form-control" placeholder="********">
-              </div>
-              <div class="text-center">
-                <button type="button" class="btn btn-my" (click)="onSignUp(userData)">Sign Up</button>
-                
-              </div>
-              <div class="text-center login">
-                Already have an account ? <a routerLink="/login">Login</a> hera.
-              </div>
-              
-          </form>
-        </div>
-      </div>
+  <div class="container d-flex justify-content-center my-5">
+    <div class="main custom-rounded">
+      <h2 class="title pt-5 pb-3 ml-2 mr-auto text-center">Sign up</h2>
+          <form (ngSubmit)="onSignUp(userData)" class="myform">
+                <div class="row rone">
+                    <div class="form-group col-md-12 fone py-3">
+                        <input type="email" name="email" class="form-control" placeholder="email@gmail.com" [(ngModel)]="userData.email">
+                    </div>
+                </div>
+                <div class="row rtwo">
+                    <div class="form-group col-md-12 ffour py-3">
+                        <input type="text" name="username" class="form-control lm" placeholder="Username" [(ngModel)]="userData.username">
+                    </div>
+                </div>
+                <div class="row rthree">
+                    <div class="form-group col-md-6 ffive py-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="userData.password">
+                    </div>
+                    <div class="form-group col-md-6 fsix py-3">
+                        <input type="password" class="form-control" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="row rfour">
+                    <div class="form-group col-md-6 fseven py-3">
+                        <button type="submit" class="btn btn-primary" (click)="onSignUp(userData)" [routerLink]="'/login'"><span>Create account</span></button>
+                    </div>
+                    <div class="form-group col-md-6 feight py-3">
+                        <p class="text-muted text-center">Already have an account?<br><a href="/login">Sign in</a></p>
+                        
+                    </div>
+                </div>
+            </form>
     </div>
-  </div>
+</div>

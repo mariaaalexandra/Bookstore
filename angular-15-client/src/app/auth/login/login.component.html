@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
     <div class="card auth">
       <div class="card-body auth-card">
@@ -26,5 +26,53 @@
         </div>
       </div>
     </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="card card0">
+      <div class="d-flex flex-lg-row flex-column-reverse">
+          <div class="card card1">
+              <div class="row justify-content-center my-auto">
+                  <div class="col-md-8 col-10 my-5">
+                      <h3 class="mb-2 text-center heading">BookVerse</h3>
+                      <h3 class="mb-4 text-center heading">Where Stories Unfold</h3>
+
+                      <h6 class="msg-info">Please login to your account</h6>
+
+                      <div class="form-group">
+                          <label class="form-control-label text-muted">Username</label>
+                          <input type="text" name="username" class="form-control" placeholder="username" [(ngModel)]="userData.username">
+                      </div>
+
+                      <div class="form-group">
+                          <label class="form-control-label text-muted">Password</label>
+                          <input type="password" name="password" class="form-control" placeholder="********" [(ngModel)]="userData.password">
+                        </div>
+
+                      <div class="row justify-content-center">
+                        <button type="button" class="btn btn-my" (click)="onLogin(userData)">Login</button>
+                      </div>
+
+                      <!-- <div class="row justify-content-center my-2">
+                          <a href="#"><small class="text-muted">Forgot Password?</small></a>
+                      </div> -->
+                  </div>
+              </div>
+              <div class="bottom text-center">
+                  <!-- <p href="#" class="sm-text mx-auto ">Don't have an account?<button class="btn btn-white ml-2">Create new</button></p> -->
+                  <a href="/sign-up" class="sm-text mx-auto">
+                    Don't have an account?
+                    <button class="btn btn-white ml-2">Create new</button>
+                  </a>
+              </div>
+            </div>
+          <div class="card card2">
+              <div class="my-auto mx-md-5 px-md-5 right">
+                  <h3 class="text-white">Welcome to BookVerse!</h3>
+                  <small class="text-white">Your Gateway to Literary Delights. Immerse Yourself in a World of Knowledge, Inspiration, and Wonder</small>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
