@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AddNewBookComponent } from './components/add-new-book/add-new-book.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgbModule
   ],
   providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+body {
+    background-color: #ffc6e1; /* replace with your desired color */
+}
+
+.btn {
+    background-color: #bff1ef; /* Default color */
+    color: #333;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(190, 15, 111); /* Color when hovered */
+    color: #fff;
+}

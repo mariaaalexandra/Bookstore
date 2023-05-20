@@ -47,6 +47,11 @@ export class BookListComponent implements OnInit {
     );
   }
 
+  onSortChange(value: string) {
+    this.sortProperties = value ? value.split(',') : [];
+    this.getSortedBooks();
+  }
+
   onFilterByCategory() {
     this.bookService.filterByCategory(this.category).subscribe(
       res => {
@@ -104,9 +109,9 @@ export class BookListComponent implements OnInit {
     );
   }
 
-onSortChange(event: any) {
-    const value = event.target.value;
-    this.sortProperties = value ? value.split(',') : [];
-    this.getSortedBooks();
-}
+// onSortChange(event: any) {
+//     const value = event.target.value;
+//     this.sortProperties = value ? value.split(',') : [];
+//     this.getSortedBooks();
+// }
 }

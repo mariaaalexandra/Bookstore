@@ -1,3 +1,4 @@
+<body>
 <div class="container">
   <div class="row">
     <div class="col-12" style="background-image: url(../../../assets/image/wood.png);">
@@ -9,7 +10,7 @@
   <div class="row">
     <div class="row" style="margin-top: 120px;">
       <div class="col-3">
-        <a routerLink="/bookList">Back to book list</a>
+        <a routerLink="/bookList" class="btn btn-primary">Back to book list</a>
         <br />
         <img class="img-fluid" style="height: 350px" img src="../../../assets/image/book{{book.id}}.jpg"/>
       </div>
@@ -27,7 +28,7 @@
             <p><span>{{book.numberOfPages}}</span> pages</p>
           </div>
           <div class="col-7">
-            <div class="card" style="border-width:5px;">
+            <div class="card" style="border-width:5px; border-color:rgb(190, 15, 111);">
               <div class="card-body">
                 <div class="col-6">
                   <h4>Our Price: <span style="color: #db3208;">$<span>
@@ -54,3 +55,4 @@
     </div>
   </div>
 </div>
+</body>

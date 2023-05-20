@@ -6,6 +6,21 @@ body {
 }
 
 .custom-class-right {
-    margin-right: -15px; /* or any other specific value that you need */
+    margin-right: -205px; /* or any other specific value that you need */
+}
+
+.sort-class-right {
+    margin-right: -15px;
+}
+
+.btn {
+    background-color: #bff1ef; /* Default color */
+    color: #333;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(190, 15, 111); /* Color when hovered */
+    color: #fff;
 }
 
