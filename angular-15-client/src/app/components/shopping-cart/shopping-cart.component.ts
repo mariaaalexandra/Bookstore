@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
 
 
   getCartItemList() {
-    this.cartService.getCartItemList().subscribe(
+    this.cartService.getCartItemList(Number(localStorage.getItem('userId'))).subscribe(
       res => {
         this.cartItemList = res;
       },
@@ -42,7 +42,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getShoppingCart() {
-    this.cartService.getShoppingCart().subscribe(
+    this.cartService.getShoppingCart(Number(localStorage.getItem('userId'))).subscribe(
       res => {
         this.shoppingCart = res;
       },

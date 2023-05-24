@@ -22,8 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.bezkoder.spring.security.login.security.jwt.AuthEntryPointJwt;
-import com.bezkoder.spring.security.login.security.jwt.AuthTokenFilter;
 import com.bezkoder.spring.security.login.security.services.UserDetailsServiceImpl;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -42,13 +40,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Autowired
   UserDetailsServiceImpl userDetailsService;
 
-  @Autowired
-  private AuthEntryPointJwt unauthorizedHandler;
 
-  @Bean
-  public AuthTokenFilter authenticationJwtTokenFilter() {
-    return new AuthTokenFilter();
-  }
+
+
 
   @Bean
   public CorsFilter corsFilter() {
@@ -114,25 +108,26 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.addFilterBefore(corsFilter(), SessionManagementFilter.class) // Add this line
             .cors().and().csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/test/**").permitAll()
-            .antMatchers(h2ConsolePath + "/**").permitAll()
+            .antMatchers(h2ConsolePath + "/**").permitAll()  // Make sure this line exists
             .antMatchers("/book/**").permitAll()
             .antMatchers("/books/**").permitAll()
             .antMatchers("/sort").permitAll()
+            .antMatchers("/cart/**").permitAll()
             .anyRequest().authenticated();
 
     http.headers().frameOptions().sameOrigin();
 
     http.authenticationProvider(authenticationProvider());
 
-    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
 
     return http.build();
   }
+
 
   @Bean
   public WebMvcConfigurer corsConfigurer() {

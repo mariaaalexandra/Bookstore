@@ -36,6 +36,7 @@ import { AddNewBookComponent } from './components/add-new-book/add-new-book.comp
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatSlideToggleModule,
     NgbModule
   ],
-  providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService],
+  providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService,CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

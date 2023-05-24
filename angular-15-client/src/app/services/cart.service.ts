@@ -11,44 +11,43 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  addItem(bookId: number, quantity: number) {
-    // let url = this.serverPath+"/cart/add";
-    // let cartItemInfo = {
-    //   "id": bookId,
-    //   "quantity": quantity
-    // };
-    // let headers = new HttpHeaders({
-    //   'Content-Type' : 'application/json',
-    //   // 'x-auth-token' : localStorage.getItem('xAuthToken')
-    // });
+  addItem(bookId: number, quantity: number, userId: number) {
+    let url = `http://localhost:8080/cart/add?userId=${userId}`;
+    let cartItemInfo = {
+      "id": bookId,
+      "quantity": quantity
+    };
+    let headers = new HttpHeaders({
+      'Content-Type' : 'application/json',
+    });
 
-    // return this.http.post(url, cartItemInfo,{headers: headers});
+    return this.http.post(url, cartItemInfo,{headers: headers});
   }
 
-  getCartItemList() {
-    let url = this.serverPath+"/cart/cartItemList";
+  getCartItemList(userId: number) {
+    let url = `http://localhost:8080/cart/cartItemList?userId=${userId}`;
 
     let headers = new HttpHeaders({
       'Content-Type' : 'application/json',
-      // 'x-auth-token' : localStorage.getItem('xAuthToken')
     });
 
     return this.http.get<CartItem []>(url, {headers, responseType: 'json'});
-  }
+}
 
-  getShoppingCart() {
-    let url = this.serverPath+"/cart/shoppingCart";
 
-    let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
-      // 'x-auth-token' : localStorage.getItem('xAuthToken')
-    });
+getShoppingCart(userId: number) {
+  let url = `http://localhost:8080/cart/shoppingCart?userId=${userId}`;
 
-    return this.http.get<ShoppingCart>(url, {headers: headers});
-  }
+  let headers = new HttpHeaders({
+    'Content-Type' : 'application/json',
+  });
+
+  return this.http.get<ShoppingCart>(url, {headers: headers});
+}
+
 
   updateCartItem(bookId: number, quantity: number) {
-    let url = this.serverPath+"/cart/updateCartItem";
+    let url = 'http://localhost:8080/cart/updateCartItem';
 
     let cartItemInfo = {
       "id": bookId,
@@ -57,7 +56,6 @@ export class CartService {
 
     let headers = new HttpHeaders({
       'Content-Type' : 'application/json',
-      // 'x-auth-token' : localStorage.getItem('xAuthToken')
     });
 
     return this.http.post(url, cartItemInfo, {headers: headers});
@@ -68,7 +66,6 @@ export class CartService {
 
     let headers = new HttpHeaders({
       'Content-Type' : 'application/json',
-      // 'x-auth-token' : localStorage.getItem('xAuthToken')
     });
 
     return this.http.post(url, id, {headers, responseType: 'json'});

@@ -10,4 +10,6 @@ export class UserService {
   changeData(newUserData: { email: string; password: string; }) {
     this.userDataSource.next(newUserData)
   }
+
+  
 }

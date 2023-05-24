@@ -27,22 +27,27 @@ export class LoginComponent implements OnInit {
   
   onLogin(userData: { username: string, password: string, roles: string[] }) {
     this.http.post('http://localhost:8080/api/auth/signin', userData)
-    .subscribe({
-      next: (res: any) => {
-        console.log(res);
-        // Navigate to the dashboard route after successful login
-        if (res.roles && res.roles.includes("ROLE_USER"))
-          this.router.navigate(['/dashboard']);
-        else 
-          this.router.navigate(['/admin']);
-
-      },
-      error: (error) => {
-        console.log(error);
-        // Handle error, e.g., show an error message to the user
-      }
-    });
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          // Store the user ID in localStorage
+          console.log("id " + res.id);
+          localStorage.setItem('userId', res.id);
+  
+          // Navigate to the dashboard route after successful login
+          if (res.roles && res.roles.includes("ROLE_USER"))
+            this.router.navigate(['/dashboard']);
+          else 
+            this.router.navigate(['/admin']);
+  
+        },
+        error: (error) => {
+          console.log(error);
+          // Handle error, e.g., show an error message to the user
+        }
+      });
   }
+  
   
   
 }

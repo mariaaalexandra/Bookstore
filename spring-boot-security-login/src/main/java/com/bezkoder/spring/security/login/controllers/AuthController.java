@@ -31,7 +31,6 @@ import com.bezkoder.spring.security.login.payload.response.UserInfoResponse;
 import com.bezkoder.spring.security.login.payload.response.MessageResponse;
 import com.bezkoder.spring.security.login.repository.RoleRepository;
 import com.bezkoder.spring.security.login.repository.UserRepository;
-import com.bezkoder.spring.security.login.security.jwt.JwtUtils;
 import com.bezkoder.spring.security.login.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -50,8 +49,6 @@ public class AuthController {
   @Autowired
   PasswordEncoder encoder;
 
-  @Autowired
-  JwtUtils jwtUtils;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -65,13 +62,12 @@ public class AuthController {
 
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-    ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
-    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE)
         .body(new UserInfoResponse(userDetails.getId(),
                                    userDetails.getUsername(),
                                    userDetails.getEmail(),
@@ -129,10 +125,5 @@ public class AuthController {
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 
-  @PostMapping("/signout")
-  public ResponseEntity<?> logoutUser() {
-    ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-        .body(new MessageResponse("You've been signed out!"));
-  }
+
 }

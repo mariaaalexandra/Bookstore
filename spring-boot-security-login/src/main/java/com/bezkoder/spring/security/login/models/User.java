@@ -38,6 +38,15 @@ public class User {
              inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "shopping_cart")
+  private ShoppingCart shoppingCart;
+
+  public ShoppingCart getShoppingCart() {
+    return shoppingCart;
+  }
+
+
   public User() {
   }
 
@@ -45,6 +54,7 @@ public class User {
     this.username = username;
     this.email = email;
     this.password = password;
+    this.shoppingCart = new ShoppingCart();
   }
 
   public Long getId() {

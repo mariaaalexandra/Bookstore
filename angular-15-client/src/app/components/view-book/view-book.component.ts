@@ -3,6 +3,8 @@ import {BookService} from '../../services/book.service';
 import {AppConst} from '../../constants/app.const';
 import {Book} from '../../models/Book';
 import {ActivatedRoute, Params} from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
 // import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -19,24 +21,27 @@ export class ViewBookComponent implements OnInit {
   public notEnoughStock: boolean | undefined;
   public addBookSuccess: boolean | undefined;
   public numberList: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  userId : number  = -1;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private cartService: CartService, private userService:UserService ) { }
 
-  // onAddToCart() {
-  //   // this.cartService.addItem(this.bookId, this.quantity).subscribe(
-  //   //   res => {
-  //   //     console.log(res);
-  //   //     this.addBookSuccess = true;
-  //   //   },
-  //   //   error => {
-  //   //     console.log(error);
-  //   //     this.addBookSuccess = false;
-  //   //     this.notEnoughStock = true;
-  //   //   }
-  //   // );
-  // }
+  onAddToCart() {
+    this.cartService.addItem(this.bookId, this.quantity, this.userId).subscribe(
+      res => {
+        console.log(res);
+        this.addBookSuccess = true;
+      },
+      error => {
+        console.log(error);
+        this.addBookSuccess = false;
+        this.notEnoughStock = true;
+      }
+    );
+  }
 
   ngOnInit() {
+    this.userId = Number(localStorage.getItem('userId'));
+    console.log("lala " + this.userId);
     this.route.params.forEach((params: Params) => {
       this.bookId = Number.parseInt(params['id']);
     });

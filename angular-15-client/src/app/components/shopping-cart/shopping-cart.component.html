@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-12" style="background-image: url(../../../assets/image/wood.png);">
       <h2 class="section-headline"><span>My Account</span></h2>
@@ -37,9 +37,11 @@
         </div>
       </div>
       <div class="row" *ngFor="let cartItem of cartItemList">
+        
         <hr/>
         <div class="col-2">
-          <a md-button (click)="onSelect(cartItem.book)"><img class="img-responsive" src="{{serverPath}}/image/book/{{cartItem.book.id}}.png" style="width:70px;" /></a>
+          <a md-button (click)="onSelect(cartItem.book)"><img class="img-responsive" src="../../../assets/image/book{{cartItem.book.id}}.jpg" style="width:70px;" /></a>
+          
         </div>
         <div class="col-6">
           <a class="pointer" (click)="onSelect(cartItem.book)">
@@ -65,4 +67,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
