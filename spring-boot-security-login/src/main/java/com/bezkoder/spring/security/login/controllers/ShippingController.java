@@ -45,4 +45,12 @@ public class ShippingController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/setDefault", method = RequestMethod.POST)
+    public ResponseEntity setDefaultShipping(@RequestBody String id, @RequestParam long userId) {
+        User user = userRepository.findUserById(userId);
+
+        userService.setDefaultShipping(Integer.parseInt(id), user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }

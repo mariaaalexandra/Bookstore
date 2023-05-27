@@ -35,11 +35,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from './services/cart.service';
-import { OrderComponent } from './components/order/order.component';
+import { DialogContentExampleDialog, OrderComponent } from './components/order/order.component';
 import { CheckoutService } from './services/checkout.service';
 import { PaymentService } from './services/payment.service';
 import { ShippingService } from './services/shipping.service';
 import { MatCardModule } from '@angular/material/card';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; // add this line
 
 // import { MatTabsModule } from '@angular/material/tabs';
 
@@ -59,6 +61,8 @@ import { MatCardModule } from '@angular/material/card';
       AdminBookListComponent,
       AddNewBookComponent,
       OrderComponent,
+      MyProfileComponent,
+      DialogContentExampleDialog
       // MatTabsModule
       // UserShippingComponent,
   ],

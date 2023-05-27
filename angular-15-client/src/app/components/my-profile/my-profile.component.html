@@ -1,0 +1,253 @@
+<app-nav-bar></app-nav-bar>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-12" style="background-image: url(../../../assets/image/wood.png);">
+      <h2 class="section-headline"><span>My Profile</span></h2>
+      <img src="../../../assets/image/logo.png" class="rounded float-left" style="padding: 0%; z-index:1;" />
+    </div>
+  </div>
+  <div *ngIf="!dataFetched">
+    <div class="row">
+      <div class="col">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px">
+    <div *ngIf ="dataFetched" style="margin: auto">
+      <div class="col-sm">
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Edit">
+                <form (ngSubmit)="onUpdateUserInfo()">
+                  <input type="hidden" name="id" [(ngModel)]="user.id" />
+                  <!-- <div class="bg-info" *ngIf="updateUserInfo">User info updated.</div> -->
+                  <div class="form-group">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">
+                      Username *
+                    </label>&nbsp;
+                    <!-- <span *ngIf="usernameExists" style="color:red">Username already exists. Choose a different one.</span> -->
+                    <input required="required" type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">
+                      Email Address *
+                    </label>&nbsp;
+                    <!-- <span *ngIf="emailExists" style="color:red">Email already exists. Choose a different one.</span> -->
+                    <input required="required" type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" />
+                    <p style="color:#828282;">A valid e-mail address. All e-mails from the system will be sent to this address.</p>
+                  </div>
+                  <button mat-raised-button type="submit" class="mat-primary" id="udpateuserInfoButton">Save</button>
+                </form>
+              </mat-tab>
+              <mat-tab label="Shipping">
+                <br>
+                <br>
+                <div>
+                  <p *ngIf="defaultShippingSet">Default shipping set successfully!</p>
+                  <mat-tab-group (selectedIndexChange)="selectedShippingChange($event)" [selectedIndex]="selectedShippingTab">
+                    <mat-tab label="List of Shipping Addresses">
+                      <form (ngSubmit)="setDefaultShipping()" method="post">
+                        <table class="table">
+                          <thead>
+                          <tr>
+                            <th>Default</th>
+                            <th>Shipping Address</th>
+                            <th>Operations</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let userShipping of userShippingList">
+                            <td>
+                              <input type="radio" name="defaultUserShippingId" [(ngModel)]="defaultShippingId" [value]="userShipping.id" />
+                              <span>default</span>
+                            </td>
+                            <td>{{userShipping.street}}, {{userShipping.city}}</td>
+                            <td>
+                              <a mat-button (click)="onUpdateShipping(userShipping)"><i class="fa fa-pencil"></i></a>
+                              <a mat-button (click)="onRemoveShipping(userShipping.id)"><i class="fa fa-times"></i></a>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        <button mat-raised-button color="primary" type="submit">Save</button>
+                      </form>
+                    </mat-tab>
+                    <mat-tab label="Add(Update) Shipping Address">
+                      <form (ngSubmit)="onNewShipping()" method="post">
+                        <input hidden="hidden" name="id" [(ngModel)]="userShipping.id" />
+                        <div class="form-group">
+                          <label for="shippingname">* Name</label>
+                          <input type="text" class="form-control" id="shippingName" placeholder="Receiver Name" name="userShippingName" required="required" [(ngModel)]="userShipping.receiverName" />
+                        </div>
+                        <div class="form-group">
+                          <label for="shippingAddress">* Street Address</label>
+                          <input type="text" class="form-control" id="shippingAddress" placeholder="Street Address" name="userShippingStreet1" required="required" [(ngModel)]="userShipping.street" />
+                        </div>
+                        <div class="form-group">
+                          <label for="shippingCity">* City</label>
+                          <input type="text" class="form-control" id="shippingCity" placeholder="Your Shipping City" name="userShippingCity" required="required" [(ngModel)]="userShipping.city" />
+                        </div>
+                        <hr />
+                        <button mat-raised-button type="submit" class="mat-primary">
+                          Save All
+                        </button>
+                      </form>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+              </mat-tab>
+              <mat-tab label="Payment">
+                <div>
+                  <p *ngIf="defaultPaymentSet">Default payment set successfully!</p>
+                  <mat-tab-group (selectedIndexChange)="selectedBillingChange($event)" [selectedIndex]="selectedBillingTab">
+                    <mat-tab label="List of Credit Cards">
+                      <form (ngSubmit)="setDefaultPayment()" method="post">
+                        <table class="table">
+                          <thead>
+                          <tr>
+                            <th>Default</th>
+                            <th>Credit Card</th>
+                            <th>Operations</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let userPayment of userPaymentList">
+                            <td>
+                              <input type="radio" name="defaultUserPaymentId" [(ngModel)]="defaultUserPaymentId" [value]="userPayment.id" />
+                              <span>default</span>
+                            </td>
+                            <td>{{userPayment.cardName}}</td>
+                            <td>
+                              <a mat-button (click)="onUpdatePayment(userPayment)"><i class="fa fa-pencil"></i></a>
+                              <a mat-button (click)="onRemovePayment(userPayment.id)"><i class="fa fa-times"></i></a>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        <button mat-raised-button class="mat-primary" type="submit">Save</button>
+                      </form>
+                    </mat-tab>
+                    <mat-tab label="Add(Update) Credit Card">
+                      <form (ngSubmit)="onNewPayment()" method="post">
+                        <input hidden="hidden" name="id" [(ngModel)]="userPayment.id" />
+                        <div class="form-group">
+                          <h5>* Give a name for your card:</h5>
+                          <input type="text" class="form-control" id="cardName" placeholder="Card Name" name="cardName" required="required" [(ngModel)]="userPayment.cardName" />
+                        </div>
+                        <!-- Billing Address -->
+                        <hr />
+                        <div class="form-group">
+                          <label for="billingName">* Name</label>
+                          <input type="text" class="form-control" id="billingName" placeholder="Receiver name" name="userBillingName" required="required" [(ngModel)]="userBilling.userBillingName" />
+                        </div>
+                        <div class="form-group">
+                          <label for="billingAddress">* Street Address</label>
+                          <input type="text" class="form-control" id="billingAddress" placeholder="Street Address" name="userBillingStreet1" required="required" [(ngModel)]="userBilling.userBillingStreet" />
+                        </div>
+                        <div class="form-group">
+                          <label for="billingCity">* City</label>
+                          <input type="text" class="form-control" id="billingCity" placeholder="Your Billing City" name="userBillingCity" required="required" [(ngModel)]="userBilling.userBillingCity" />
+                        </div>
+                        <!-- User Payment -->
+                        <hr />
+                        <div class="form-group">
+                          <h4>Credit Card Information</h4>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <img src="../../../assets/image/creditcard.png" class="img-responsive" />
+                            <br>
+                            <div class="form-group">
+                              <label for="cardType">* Select Card Type</label>
+                              <select id="cardType" class="form-control" name="cardType" [(ngModel)]="userPayment.type" required="required">
+                                <option value="" disabled>-- Card Type --</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="discover">Discover</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="cardHolder">* Card Holder</label>
+                              <input type="text" class="form-control" id="cardholder" placeholder="Card Holder Name" name="cardHolderName" required="required" [(ngModel)]="userPayment.holderName" />
+                            </div>
+                            <div class="form-group">
+                              <label for="cardNumber">* Card Number</label>
+                              <div class="input-group">
+                                <input required="required" id="cardNumber" type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" [(ngModel)]="userPayment.cardNumber" />
+                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-7">
+                            <div class="form-group">
+                              <label>* Expiration Date</label>
+                              <div class="row">
+                                <div class="col-6">
+                                  <select class="form-control" name="expiryMonth" required="required" [(ngModel)]="userPayment.expiryMonth">
+                                    <option value="" disabled="disabled">
+                                      -- Month --
+                                    </option>
+                                    <option value="1">Jan (01)</option>
+                                    <option value="2">Feb (02)</option>
+                                    <option value="3">Mar (03)</option>
+                                    <option value="4">Apr (04)</option>
+                                    <option value="5">May (05)</option>
+                                    <option value="6">Jun (06)</option>
+                                    <option value="7">July (07)</option>
+                                    <option value="8">Aug (08)</option>
+                                    <option value="9">Sep (09)</option>
+                                    <option value="10">Oct (10)</option>
+                                    <option value="11">Nov (11)</option>
+                                    <option value="12">Dec (12)</option>
+                                  </select>
+                                </div>
+                                <div class="col-6">
+                                  <select class="form-control" name="expiryYear" required="required" [(ngModel)]="userPayment.expiryYear">
+                                    <option value="" disabled="disabled">
+                                      -- Year --
+                                    </option>
+                                    <option value="18">2018</option>
+                                    <option value="19">2019</option>
+                                    <option value="20">2020</option>
+                                    <option value="21">2021</option>
+                                    <option value="22">2022</option>
+                                    <option value="23">2023</option>
+                                    <option value="24">2024</option>
+                                    <option value="25">2025</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-5 pull-right">
+                            <div class="form-group">
+                              <label for="cardCVC">CV Code</label>
+                              <input id="cardCVC" type="tel" class="form-control" name="cardCVC" placeholder="CVC" [(ngModel)]="userPayment.cvc" />
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                        <button mat-raised-button type="submit" class="mat-primary">
+                          Save All
+                        </button>
+                      </form>
+                    </mat-tab>
+                    
+                  </mat-tab-group>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+</div>

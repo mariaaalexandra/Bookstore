@@ -14,7 +14,8 @@ import {CheckoutService} from "../../services/checkout.service";
 import {CartService} from "../../services/cart.service";
 import {ShippingService} from "../../services/shipping.service";
 import {PaymentService} from "../../services/payment.service";
-import { fakeAsync } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
+ 
 
 @Component({
   selector: 'app-order',
@@ -38,7 +39,16 @@ export class OrderComponent implements OnInit {
   public emptyPaymentList: boolean = false;
   public order: Order = new Order();
 
-  constructor(public router: Router, public cartService: CartService, public shippingService: ShippingService, public paymentService: PaymentService, public checkoutService: CheckoutService) { }
+  constructor(public router: Router, public dialog: MatDialog, public cartService: CartService, public shippingService: ShippingService, public paymentService: PaymentService, public checkoutService: CheckoutService) { }
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigateByUrl('/dashboard');
+    });
+  }
 
   selectedChange(val: number) {
     this.selectedTab = val;
@@ -85,6 +95,7 @@ export class OrderComponent implements OnInit {
     this.billingAddress.billingAddressName = userPayment.userBilling.userBillingName;
     this.billingAddress.billingAddressStreet = userPayment.userBilling.userBillingStreet;
     this.billingAddress.billingAddressCity = userPayment.userBilling.userBillingCity;
+    console.log("p " + this.payment);
   }
 
   setBillingAsShipping(checked: boolean){
@@ -100,22 +111,7 @@ export class OrderComponent implements OnInit {
   }
 
   onSubmit() {
-    this.checkoutService.checkout(this.shippingAddress, this.billingAddress, this.payment).subscribe(
-      res => {
-        this.order = res;
 
-        let navigationExtras: NavigationExtras = {
-          queryParams: {
-            "order": JSON.stringify(this.order)
-          }
-        };
-
-        this.router.navigate(['/orderSummary'], navigationExtras);
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 
 
@@ -149,23 +145,35 @@ export class OrderComponent implements OnInit {
       }
     );
 
-    // this.paymentService.getUserPaymentList().subscribe(
-    //   res => {
-    //     this.userPaymentList = res;
-    //     if (this.userPaymentList.length){
-    //       this.emptyPaymentList = false;
+    this.paymentService.getUserPaymentList(Number(localStorage.getItem('userId'))).subscribe(
+      res => {
+        this.userPaymentList = res;
+        if (this.userPaymentList.length){
+          this.emptyPaymentList = false;
 
-    //       for (let userPayment of this.userPaymentList){
-    //         if (userPayment.defaultPayment){
-    //           this.setPaymentMethod(userPayment);
-    //         }
-    //       }
-    //     }
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
+          for (let userPayment of this.userPaymentList){
+            if (userPayment.defaultPayment){
+              this.setPaymentMethod(userPayment);
+            }
+          }
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  template: `<h2 mat-dialog-title>Dialog title</h2>
+              <mat-dialog-content class="mat-typography">
+                <p>Successfully purchased!</p>
+              </mat-dialog-content>
+              <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close>Close</button>
+              </mat-dialog-actions>`,
+})
+export class DialogContentExampleDialog {}

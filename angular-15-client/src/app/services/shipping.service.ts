@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AppConst} from '../constants/app.const';
 import {UserShipping} from '../models/user-shipping';
 
@@ -9,15 +9,12 @@ export class ShippingService {
 
   constructor(private http: HttpClient) { }
 
-  newShipping(shipping: UserShipping) {
-    let url = this.serverPath+"/shipping/add";
-
-    let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
-    });
-
-    return this.http.post(url, JSON.stringify(shipping), {headers: headers});
+  newShipping(shipping: UserShipping, userId: number) {
+    const url = `http://localhost:8080/shipping/add?userId=${userId}`;
+  
+    return this.http.post(url, shipping);
   }
+  
 
   getShippingList(userId: number) {
     let url = `http://localhost:8080/shipping/getUserShippingList?userId=${userId}`;
@@ -39,15 +36,17 @@ export class ShippingService {
 
     return this.http.post(url, id, {headers: headers});
   }
-
-  setDefaultShipping(id: number) {
-    let url = this.serverPath+"/shipping/setDefault";
-
+  setDefaultShipping(id: string, userId: number) {
+    let url = `http://localhost:8080/shipping/setDefault`;
+  
     let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
+      'Content-Type': 'text/plain',
     });
-
-    return this.http.post(url, id, {headers: headers});
+  
+    let params = new HttpParams().set('userId', String(userId));
+  
+    return this.http.post(url, id, { headers: headers, params: params });
   }
+  
 
 }

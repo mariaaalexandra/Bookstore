@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <body>
 <div class="container">
   <div class="row">
@@ -17,12 +18,12 @@
           <hr />
           <div class="row">
             <div class="col-7 text-left">
-              <h3 style="color:darkred; "><strong>Order total:</strong></h3>
+              <h3 style="color:darkred; "><strong>Total:</strong></h3>
             </div>
             <div class="col-5 text-right">
-              <h3><strong style="color:darkred; ">$<span
+              <h5><strong style="color:darkred; ">$<span
               >{{shoppingCart.total | number : '1.2-2'}}</span>
-              </strong></h3>
+              </strong></h5>
             </div>
           </div>
         </div>
@@ -257,8 +258,8 @@
                 ></span>{{shoppingCart.total}}</span></h4>
                 <br/>
                 <br/>
-                <button mat-raised-button type="submit" class="btn-block mat-primary">Place your order
-                </button>
+                <button mat-raised-button type="submit" class="btn-block mat-primary" (click)="openDialog()">Place your order</button>
+
               </div>
             </div>
           </mat-tab>

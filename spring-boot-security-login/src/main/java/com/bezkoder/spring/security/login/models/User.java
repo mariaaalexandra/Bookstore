@@ -64,6 +64,10 @@ public class User {
   @JsonIgnore
   private List<Order> orderList;
 
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @JsonIgnore
+  private List<UserPayment> userPaymentList;
+
   public List<Order> getOrderList() {
     return orderList;
   }
@@ -84,6 +88,13 @@ public class User {
     this.userShippingList = userShippingList;
   }
 
+  public List<UserPayment> getUserPaymentList() {
+    return userPaymentList;
+  }
+
+  public void setUserPaymentList(List<UserPayment> userPaymentList) {
+    this.userPaymentList = userPaymentList;
+  }
 
   public Long getId() {
     return id;

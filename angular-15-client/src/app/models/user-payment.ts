@@ -1,7 +1,7 @@
 import {UserBilling} from './user-billing';
 
 export class UserPayment {
-  public id: number = -1;
+  public id!: number;
   public type: string = "";
   public cardName: string = "";
   public cardNumber: string = "";
