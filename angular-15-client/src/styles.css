@@ -1,6 +1,7 @@
 /* Add application styles & imports to this file! */
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 @import url('../node_modules/simple-keyboard/build/css/index.css');
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 
 .auth-card{
@@ -113,4 +114,10 @@ md-slide-toggle {
 
 .full-width {
   width: 100%;
+}
+
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-group.mat-primary .mat-tab-labels .mat-tab-label.mat-tab-label-active {
+  background-color: #db3208;
+  color: #fff;
 }

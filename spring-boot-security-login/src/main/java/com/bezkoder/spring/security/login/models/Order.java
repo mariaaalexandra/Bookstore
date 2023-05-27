@@ -21,14 +21,14 @@ public class Order implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<CartItem> cartItemList;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private BillingAddress billingAddress;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private ShippingAddress shippingAddress;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Payment payment;
+    @OneToOne(cascade = CascadeType.ALL)
+    private BillingAddress billingAddress;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private ShippingAddress shippingAddress;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Payment payment;
 
     @ManyToOne
     @JsonIgnore
@@ -74,29 +74,29 @@ public class Order implements Serializable {
         this.cartItemList = cartItemList;
     }
 
-//    public BillingAddress getBillingAddress() {
-//        return billingAddress;
-//    }
-//
-//    public void setBillingAddress(BillingAddress billingAddress) {
-//        this.billingAddress = billingAddress;
-//    }
-//
-//    public ShippingAddress getShippingAddress() {
-//        return shippingAddress;
-//    }
-//
-//    public void setShippingAddress(ShippingAddress shippingAddress) {
-//        this.shippingAddress = shippingAddress;
-//    }
-//
-//    public Payment getPayment() {
-//        return payment;
-//    }
-//
-//    public void setPayment(Payment payment) {
-//        this.payment = payment;
-//    }
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
     public User getUser() {
         return user;

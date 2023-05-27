@@ -1,7 +1,7 @@
 export class UserShipping {
-  public id: number | undefined;
-  public receiverName: string | undefined;
-  public street: string | undefined;
-  public city: string | undefined;
-  public defaultShipping: boolean | undefined;
+  public id: number = -1;
+  public receiverName: string = "";
+  public street: string ="";
+  public city: string ="";
+  public defaultShipping: boolean=false;
 }

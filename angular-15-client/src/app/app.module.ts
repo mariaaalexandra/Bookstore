@@ -17,10 +17,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AdminBarComponent } from './components/admin-bar/admin-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-const routes: Routes = [
-  // ... other routes
-  { path: 'dashboard', component: DashboardComponent },
-];
+import {MaterialModule} from './material.module';
+
 import { ViewBookComponent } from './components/view-book/view-book.component';
 import { BookListService } from './services/book-list.service';
 import { CommonModule } from '@angular/common';
@@ -37,6 +35,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from './services/cart.service';
+import { OrderComponent } from './components/order/order.component';
+import { CheckoutService } from './services/checkout.service';
+import { PaymentService } from './services/payment.service';
+import { ShippingService } from './services/shipping.service';
+import { MatCardModule } from '@angular/material/card';
+
+// import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,8 @@ import { CartService } from './services/cart.service';
       AdminBarComponent,
       AdminBookListComponent,
       AddNewBookComponent,
+      OrderComponent,
+      // MatTabsModule
       // UserShippingComponent,
   ],
   imports: [
@@ -69,9 +76,12 @@ import { CartService } from './services/cart.service';
     MatInputModule,
     MatSelectModule,
     MatSlideToggleModule,
-    NgbModule
+    NgbModule,
+    MatCardModule,
+    MaterialModule
   ],
-  providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService,CartService],
+  providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService,CartService,
+              CheckoutService, PaymentService, ShippingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

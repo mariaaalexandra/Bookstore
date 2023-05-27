@@ -117,6 +117,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .antMatchers("/books/**").permitAll()
             .antMatchers("/sort").permitAll()
             .antMatchers("/cart/**").permitAll()
+            .antMatchers("/shipping/**").permitAll()
             .anyRequest().authenticated();
 
     http.headers().frameOptions().sameOrigin();

@@ -1,6 +1,9 @@
 package com.bezkoder.spring.security.login.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -56,6 +59,31 @@ public class User {
     this.password = password;
     this.shoppingCart = new ShoppingCart();
   }
+
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<Order> orderList;
+
+  public List<Order> getOrderList() {
+    return orderList;
+  }
+
+  public void setOrderList(List<Order> orderList) {
+    this.orderList = orderList;
+  }
+
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  private List<UserShipping> userShippingList;
+
+  public List<UserShipping> getUserShippingList() {
+    return userShippingList;
+  }
+
+  public void setUserShippingList(List<UserShipping> userShippingList) {
+    this.userShippingList = userShippingList;
+  }
+
 
   public Long getId() {
     return id;

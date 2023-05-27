@@ -4,3 +4,26 @@
     margin-right: 0 !important;
   }
   
+  .btn {
+    background-color: #bff1ef; /* Default color */
+    color: #333;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(190, 15, 111); /* Color when hovered */
+    color: #fff;
+}
+
+.nav-link {
+  background-color: #bff1ef; /* Default color */
+    color: #333;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+  background-color: rgb(190, 15, 111); /* Color when hovered */
+  color: #fff;
+}
+
+

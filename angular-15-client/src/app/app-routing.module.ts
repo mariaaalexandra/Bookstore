@@ -10,6 +10,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { AdminBarComponent } from './components/admin-bar/admin-bar.component';
 import { AdminBookListComponent } from './components/admin-book-list/admin-book-list.component';
 import { AddNewBookComponent } from './components/add-new-book/add-new-book.component';
+import { OrderComponent } from './components/order/order.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'tutorials', component: TutorialsListComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminBarComponent},
   { path: 'admin/bookList', component: AdminBookListComponent},
   { path: 'admin/addNewBook', component:AddNewBookComponent},
-  { path: 'cart/shoppingCart/:id', component:ShoppingCartComponent}
+  { path: 'cart/shoppingCart/:id', component:ShoppingCartComponent},
+  { path: 'checkout', component: OrderComponent},
 ];
 
 @NgModule({
