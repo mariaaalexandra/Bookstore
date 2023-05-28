@@ -2,14 +2,17 @@ package com.bezkoder.spring.security.login.controllers;
 
 import com.bezkoder.spring.security.login.models.*;
 import com.bezkoder.spring.security.login.repository.UserRepository;
+import com.bezkoder.spring.security.login.security.services.BookService;
 import com.bezkoder.spring.security.login.security.services.CartItemService;
 import com.bezkoder.spring.security.login.security.services.OrderService;
 import com.bezkoder.spring.security.login.security.services.ShoppingCartService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,23 +30,27 @@ public class CheckoutController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    @Autowired
+    private BookService bookService;
+
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
-    public Order checkout(@RequestBody HashMap<String, Object> mapper,@RequestParam long userId) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        ShippingAddress shippingAddress = objectMapper.convertValue(mapper.get("shippingAddress"), ShippingAddress.class);
-        BillingAddress billingAddress = objectMapper.convertValue(mapper.get("billingAddress"), BillingAddress.class);
-        Payment payment = objectMapper.convertValue(mapper.get("payment"), Payment.class);
-
+    public ResponseEntity checkout(@RequestParam long userId) {
         ShoppingCart shoppingCart = userService.findUserById(userId).getShoppingCart();
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-        User user = userService.findUserById(userId);
 
-        Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, user);
+        // Traverse through each CartItem in the list
+        for (CartItem cartItem : cartItemList) {
+            Book book = cartItem.getBook();
+            int bookQty = cartItem.getQuantity();
+            int totalNr = book.getInStockNumber();
 
+            book.setInStockNumber(totalNr - bookQty);
+
+            bookService.save(book);
+
+        }
         shoppingCartService.clear(shoppingCart);
 
-        return order;
+        return new ResponseEntity("Remove Success!", HttpStatus.OK);
     }
 }

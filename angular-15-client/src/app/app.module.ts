@@ -40,7 +40,7 @@ import { CheckoutService } from './services/checkout.service';
 import { PaymentService } from './services/payment.service';
 import { ShippingService } from './services/shipping.service';
 import { MatCardModule } from '@angular/material/card';
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { DialogContent, MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; // add this line
 
 // import { MatTabsModule } from '@angular/material/tabs';
@@ -62,7 +62,8 @@ import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; /
       AddNewBookComponent,
       OrderComponent,
       MyProfileComponent,
-      DialogContentExampleDialog
+      DialogContentExampleDialog,
+      DialogContent
       // MatTabsModule
       // UserShippingComponent,
   ],

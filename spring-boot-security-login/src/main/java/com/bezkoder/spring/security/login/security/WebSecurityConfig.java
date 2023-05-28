@@ -119,6 +119,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .antMatchers("/cart/**").permitAll()
             .antMatchers("/shipping/**").permitAll()
             .antMatchers("/payment/**").permitAll()
+            .antMatchers("/checkout/**").permitAll()
             .anyRequest().authenticated();
 
     http.headers().frameOptions().sameOrigin();

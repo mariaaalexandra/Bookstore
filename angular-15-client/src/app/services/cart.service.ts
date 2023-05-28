@@ -62,12 +62,13 @@ getShoppingCart(userId: number) {
   }
 
   removeCartItem(id: number) {
-    let url = this.serverPath+"/cart/removeCartItem";
-
+    let url = 'http://localhost:8080/cart/removeCartItem';
     let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
+      'Content-Type' : 'text/plain',
     });
 
-    return this.http.post(url, id, {headers, responseType: 'json'});
+    // Convert the id to string before sending it
+    return this.http.post(url, id.toString(), {headers: headers, responseType: 'text'});
   }
+
 }

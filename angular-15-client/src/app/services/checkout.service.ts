@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ShippingAddrees} from "../models/shipping-addrees";
-import {BillingAddress} from "../models/billing-address";
-import {Payment} from "../models/payment";
 import {Order} from "../models/order";
 import {AppConst} from "../constants/app.const";
 
@@ -13,20 +10,16 @@ export class CheckoutService {
 
   constructor(private http: HttpClient) {}
 
-  checkout(shippingAddress: ShippingAddrees, billingAddress: BillingAddress, payment: Payment) {
-    let url = this.serverPath+"/checkout/checkout";
+  checkout(userId: number) {
+    let url = "http://localhost:8080/checkout/checkout?userId=" + userId;
 
-    let orderInfo = {
-      "shippingAddress": shippingAddress,
-      "billingAddress": billingAddress,
-      "payment": payment,
-    };
     let headers = new HttpHeaders({
       'Content-Type' : 'application/json',
     });
 
-    return this.http.post<Order>(url, orderInfo, {headers, responseType: 'json'});
+    return this.http.post(url, {headers, responseType: 'json'});
   }
+
 
   getUserOrder() {
     let url = this.serverPath+"/checkout/getUserOrder";

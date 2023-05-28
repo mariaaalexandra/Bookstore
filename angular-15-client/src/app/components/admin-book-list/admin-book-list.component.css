@@ -1,3 +1,4 @@
+
 table {
   border-collapse: separate;
   border-spacing: 0;
@@ -25,6 +26,7 @@ tbody tr:nth-child(even) {
 td {
   border-bottom: 1px solid #cecfd5;
   border-right: 1px solid #cecfd5;
+  background-color: #fff;
 }
 td:first-child {
   border-left: 1px solid #cecfd5;
@@ -47,5 +49,10 @@ tfoot {
   text-align: right;
 }
 tfoot tr:last-child {
-  background: #f0f0f2;
+  background: #656598;
+}
+
+.custom-button {
+  background-color: red !important;
+  color: white !important; /* Text color */
 }

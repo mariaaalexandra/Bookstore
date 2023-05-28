@@ -44,11 +44,22 @@ export class OrderComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
+  
     dialogRef.afterClosed().subscribe(() => {
-      this.router.navigateByUrl('/dashboard');
+      // Call the checkout method when the dialog is closed
+      this.checkoutService.checkout(Number(localStorage.getItem('userId'))).subscribe(
+        response => {
+          // console.log(response);
+          this.router.navigateByUrl('/dashboard');
+        },
+        error => {
+          console.error(error);
+        }
+      );
     });
   }
+
+
 
   selectedChange(val: number) {
     this.selectedTab = val;
@@ -86,6 +97,7 @@ export class OrderComponent implements OnInit {
 
   setPaymentMethod(userPayment: UserPayment) {
     this.payment.type = userPayment.type;
+    this.payment.cardName = '' + userPayment.cardName;
     this.payment.cardNumber = userPayment.cardNumber;
     this.payment.expiryMonth = userPayment.expiryMonth;
     this.payment.expiryYear = userPayment.expiryYear;
@@ -95,7 +107,7 @@ export class OrderComponent implements OnInit {
     this.billingAddress.billingAddressName = userPayment.userBilling.userBillingName;
     this.billingAddress.billingAddressStreet = userPayment.userBilling.userBillingStreet;
     this.billingAddress.billingAddressCity = userPayment.userBilling.userBillingCity;
-    console.log("p " + this.payment);
+    console.log("p " + this.payment.cardName);
   }
 
   setBillingAsShipping(checked: boolean){

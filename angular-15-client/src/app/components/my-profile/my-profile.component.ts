@@ -10,6 +10,7 @@ import {UserPayment} from '../../models/user-payment';
 import {UserBilling} from '../../models/user-billing';
 import {PaymentService} from "../../services/payment.service";
 import {Order} from "../../models/order";
+import { MatDialog } from '@angular/material/dialog';
 // import {OrderService} from "../../services/O";
 
 @Component({
@@ -45,7 +46,9 @@ export class MyProfileComponent implements OnInit {
   public displayOrderDetail: boolean = false;
 
 
-  constructor(public userService: UserService, public router: Router, public shippingService: ShippingService, public paymentService: PaymentService) { }
+  
+
+  constructor(public userService: UserService, public dialog: MatDialog, public router: Router, public shippingService: ShippingService, public paymentService: PaymentService) { }
 
   onUpdateUserInfo() {
     // Assuming that `this.user` is an object with fields `id`, `username`, and `email`
@@ -64,6 +67,10 @@ export class MyProfileComponent implements OnInit {
     );
   }
   
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContent);
+
+  }
 
   getCurrentUser() {
   this.userService.getCurrentUser(Number(localStorage.getItem('userId'))).subscribe(
@@ -237,4 +244,18 @@ export class MyProfileComponent implements OnInit {
     this.defaultShippingSet = false;
   }
 
+  
+
 }
+
+@Component({
+  selector: 'dialog-content',
+  template: `<h2 mat-dialog-title>Update</h2>
+              <mat-dialog-content class="mat-typography">
+                <p>Fields updated successfully!</p>
+              </mat-dialog-content>
+              <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close>Close</button>
+              </mat-dialog-actions>`,
+})
+export class DialogContent {}

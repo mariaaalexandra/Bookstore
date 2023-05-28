@@ -5,3 +5,13 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #c84dde, #f1e886);
+  z-index: -1;
+}

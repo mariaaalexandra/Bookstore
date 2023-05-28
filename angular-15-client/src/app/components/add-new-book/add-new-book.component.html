@@ -1,4 +1,5 @@
-<div class="container">
+<html class="background">
+<div class="container" >
   <div [hidden]="bookAdded">
     <h3 style="margin-top: 30px;">New Book Information</h3>
 
@@ -44,8 +45,12 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="1">
           <mat-select placeholder="Language" id="language" name="language" [(ngModel)]="newBook.language">
-            <mat-option value="ukrainian">Ukrainian</mat-option>
             <mat-option value="english">English</mat-option>
+            <mat-option value="english">Romanian</mat-option>
+            <mat-option value="english">German</mat-option>
+            <mat-option value="english">French</mat-option>
+            <mat-option value="english">Italian</mat-option>
+            <mat-option value="english">Spanish</mat-option>
           </mat-select>
         </mat-grid-tile>
       </mat-grid-list>
@@ -96,3 +101,4 @@
     <h3>Book added successfully!</h3>
   </div>
 </div>
+</html>

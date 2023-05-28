@@ -1,6 +1,7 @@
-body {
-    /* background-color: #f9d6e6; replace with your desired color */
-    width: auto;
-    height: auto;
-
-}
+.body-color {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #f9d6e6;    
+    z-index: -1;
+  }

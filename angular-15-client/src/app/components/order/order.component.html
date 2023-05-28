@@ -11,8 +11,7 @@
     <div class="col-3">
       <div class="card">
         <div class="card-body">
-          <button mat-raised-button type="submit " class="btn-block mat-primary">Place your order
-          </button>
+        
           <hr/>
           <h3>Order Summary</h3>
           <hr />
@@ -97,10 +96,10 @@
                   <tbody>
                   <tr *ngFor="let userPayment of userPaymentList ">
                     <td>
-                      {{userPayment.cardName}}
+                      {{userPayment.cardNumber}}
                     </td>
                     <td>
-                      <a class="pointer" (click)="setPaymentMethod(userPayment)">use this address
+                      <a class="pointer" (click)="setPaymentMethod(userPayment)">use this cart
                       </a>
                     </td>
                   </tr>
@@ -109,86 +108,49 @@
                 <!-- CREDIT CARD FORM STARTS HERE -->
                 <div class="row">
                   <div class="col-12">
-                    <img src="../../../assets/image/creditcard.png" class="img-fluid" />
-                    <br/>
-                    <div class="form-group">
-                      <label for="cardType">* Select Card Type:</label>
-                      <select class="form-control" id="cardType" name="type" [(ngModel)]="payment.type">
-                        <option value="" disabled="disabled">
-                          -- Card Type --
-                        </option>
-                        <option value="visa">Visa</option>
-                        <option value="mastercard">Mastercard</option>
-                        <option value="discover">Discover</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="cardHolder">* Card Holder</label>
-                      <input type="text" class="form-control" id="cardHolder" required="required" placeholder="Card Holder Name" name="holderName" [(ngModel)]="payment.holderName" />
-                    </div>
-                    <div class="form-group">
-                      <label for="cardNumber">* Card Number</label>
-                      <div class="input-group">
-                        <input required="required" id="cardNumber" type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" name="cardNumber" [(ngModel)]="payment.cardNumber" />
-                        <span class="input-group-addon"><i class="fa fa-credit-card"
-                                                           aria-hidden="true"></i></span>
+                      <img src="../../../assets/image/creditcard.png" class="img-fluid" />
+                      <br/>
+                      <div class="form-group">
+                          <label for="cardType">* Card Type:</label>
+                          <input type="text" class="form-control" id="cardType" name="type" [(ngModel)]="payment.cardName" placeholder="Card Type">
                       </div>
-                    </div>
+                      <div class="form-group">
+                          <label for="cardHolder">* Card Holder</label>
+                          <input type="text" class="form-control" id="cardHolder" required="required" placeholder="Card Holder Name" name="holderName" [(ngModel)]="payment.holderName" />
+                      </div>
+                      <div class="form-group">
+                          <label for="cardNumber">* Card Number</label>
+                          <div class="input-group">
+                              <input required="required" id="cardNumber" type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" [(ngModel)]="payment.cardNumber" />
+                              <span class="input-group-addon"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+                          </div>
+                      </div>
                   </div>
-                </div>
-                <div class="row">
+              </div>
+              <div class="row">
                   <div class="col-7">
-                    <div class="form-group">
-                      <label>* Expiration Date</label>
-                      <div class="row">
-                        <div class="col-6">
-                          <select class="form-control" name="expiryMonth" required="required" [(ngModel)]="payment.expiryMonth">
-                            <option value="" disabled="disabled">
-                              --Month--
-                            </option>
-                            <option value="1">Jan (01)</option>
-                            <option value="2">Feb (02)</option>
-                            <option value="3">Mar (03)</option>
-                            <option value="4">Apr (04)</option>
-                            <option value="5">May (05)</option>
-                            <option value="6">June (06)</option>
-                            <option value="7">July (07)</option>
-                            <option value="8">Aug (08)</option>
-                            <option value="9">Sep (09)</option>
-                            <option value="10">Oct (10)</option>
-                            <option value="11">Nov (11)</option>
-                            <option value="12">Dec (12)</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" name="expiryYear" [(ngModel)]="payment.expiryYear">
-                            <option value="" disabled="disabled">--Year--
-                            </option>
-                            <option value="17">2017</option>
-                            <option value="18">2018</option>
-                            <option value="19">2019</option>
-                            <option value="20">2020</option>
-                            <option value="21">2021</option>
-                            <option value="22">2022</option>
-                            <option value="23">2023</option>
-                            <option value="23">2024</option>
-                            <option value="23">2025</option>
-                            <option value="23">2026</option>
-                            <option value="23">2027</option>
-                            <option value="23">2028</option>
-                            <option value="23">2029</option>
-                          </select>
-                        </div>
+                      <div class="form-group">
+                          <label>* Expiration Date</label>
+                          <div class="row">
+                              <div class="col-6">
+                                  <label for="expiryMonth">Month</label>
+                                  <input type="text" class="form-control" id="expiryMonth" name="expiryMonth" required="required" placeholder="Month (MM)" [(ngModel)]="payment.expiryMonth">
+                              </div>
+                              <div class="col-6">
+                                  <label for="expiryYear">Year</label>
+                                  <input type="text" class="form-control" id="expiryYear" name="expiryYear" placeholder="Year (YYYY)" [(ngModel)]="payment.expiryYear">
+                              </div>
+                          </div>
                       </div>
-                    </div>
                   </div>
-                  <div class="col-5 col-5 pull-right">
-                    <div class="form-group">
-                      <label for="cardCVC">CV Code</label>
-                      <input id="cardCVC" type="tel" class="form-control" name="cardCVC" placeholder="CVC" name="cvc" [(ngModel)]="payment.cvc" />
-                    </div>
+                  <div class="col-5 mt-auto">
+                      <div class="form-group">
+                          <label for="cardCVC">CV Code</label>
+                          <input id="cardCVC" type="tel" class="form-control" name="cardCVC" placeholder="CVC" [(ngModel)]="payment.cvc" />
+                      </div>
                   </div>
-                </div>
+              </div>
+              
                 <!-- CREDIT CARD FORM ENDS HERE -->
                 <div class="checkbox">
                   <label>
@@ -258,7 +220,7 @@
                 ></span>{{shoppingCart.total}}</span></h4>
                 <br/>
                 <br/>
-                <button mat-raised-button type="submit" class="btn-block mat-primary" (click)="openDialog()">Place your order</button>
+                <button mat-raised-button type="submit" class="btn-block mat-primary" (click)="openDialog(); router.navigateByUrl('/dashboard');">Place your order</button>
 
               </div>
             </div>
