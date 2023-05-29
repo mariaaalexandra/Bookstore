@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           // Store the user ID in localStorage
           console.log("id " + res.id);
           localStorage.setItem('userId', res.id);
+          localStorage.setItem('role', res.roles[0]);
   
           // Navigate to the dashboard route after successful login
           if (res.roles && res.roles.includes("ROLE_USER"))

@@ -14,14 +14,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import this
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 
 
 @NgModule({
   imports: [MatButtonModule, MatToolbarModule, MatGridListModule, MatInputModule, MatFormFieldModule, MatSelectModule,
-    MatSlideToggleModule, MatTabsModule, MatCardModule, MatProgressSpinnerModule, MatPaginatorModule, MatTableModule, MatDialogModule],
+    MatSlideToggleModule, MatTabsModule, MatCardModule, MatProgressSpinnerModule, MatPaginatorModule, MatTableModule, MatDialogModule, MatListModule],
   exports: [MatButtonModule, MatToolbarModule, MatGridListModule, MatInputModule, MatFormFieldModule, MatSelectModule,
-    MatSlideToggleModule, MatTabsModule, MatCardModule, MatProgressSpinnerModule, MatPaginatorModule, MatTableModule, BrowserAnimationsModule, MatDialogModule],
+    MatSlideToggleModule, MatTabsModule, MatCardModule, MatProgressSpinnerModule, MatPaginatorModule, MatTableModule, BrowserAnimationsModule, MatDialogModule, MatListModule],
 })
 export class MaterialModule {
 

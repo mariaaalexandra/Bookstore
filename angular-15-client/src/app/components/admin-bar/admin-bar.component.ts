@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { LoginService} from '../../services/login.service';
 import { Router} from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin-bar',
@@ -11,27 +12,16 @@ export class AdminBarComponent implements OnInit {
 
   loggedIn = false;
 
-  constructor( private router: Router) { }
+  constructor( private router: Router,private authS:AuthService) { }
 
   ngOnInit() {
-    // this.loginService.checkSession().subscribe(
-    //   res => {
-    //     this.loggedIn = true;
-    //   },
-    //   error => {
-    //     this.loggedIn = false;
-    //   });
-    // this.router.adminigate(['/']);
+  
   }
 
   logout() {
-    // this.loginService.logout().subscribe(
-    //   res => {
-    //     location.reload();
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   });
+    this.authS.logout();
+    window.location.href = '/login'; // This will navigate to the login page
   }
+  
 
 }

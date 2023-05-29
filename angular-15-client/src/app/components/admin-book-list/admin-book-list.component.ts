@@ -21,7 +21,7 @@ export class AdminBookListComponent implements OnInit {
 
   onSelect(book: Book) {
     this.selectedBook = book;
-    this.router.navigate(['/viewBook', this.selectedBook.id]);
+    this.router.navigate(['/view', this.selectedBook.id]);
   }
 
   openDialog(book: Book) {

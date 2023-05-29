@@ -1,7 +1,9 @@
-.body-color {
+.background {
     /* position: fixed; */
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    background-color: #f9d6e6;    
+    background-color: rgb(201, 176, 224);
     z-index: -1;
   }

@@ -12,22 +12,46 @@ import { AdminBookListComponent } from './components/admin-book-list/admin-book-
 import { AddNewBookComponent } from './components/add-new-book/add-new-book.component';
 import { OrderComponent } from './components/order/order.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { RoleGuard } from './services/guard.service';
+import { ViewComponent } from './components/view-book-admin/view.component';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'tutorials', component: TutorialsListComponent },
+  { path: 'tutorials', 
+  component: TutorialsListComponent, 
+  canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' } },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'bookList', component: BookListComponent},
-  { path: 'viewBook/:id', component: ViewBookComponent},
-  { path: 'shoppingCart', component: ShoppingCartComponent},
-  { path: 'admin', component: AdminBarComponent},
-  { path: 'admin/bookList', component: AdminBookListComponent},
-  { path: 'admin/addNewBook', component:AddNewBookComponent},
-  { path: 'cart/shoppingCart/:id', component:ShoppingCartComponent},
-  { path: 'checkout', component: OrderComponent},
-  { path: 'myProfile', component: MyProfileComponent},
+  { path: 'dashboard', 
+  component: DashboardComponent, 
+  canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' } },
+  { path: 'bookList', component: BookListComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'viewBook/:id', component: ViewBookComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'view/:id', component: ViewComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_ADMIN' }},
+  { path: 'shoppingCart', component: ShoppingCartComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'admin', 
+  component: AdminBarComponent,
+  canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_ADMIN' }},
+  { path: 'admin/bookList', component: AdminBookListComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_ADMIN' }},
+  { path: 'admin/addNewBook', component:AddNewBookComponent, canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_ADMIN' }},
+  { path: 'cart/shoppingCart/:id', component:ShoppingCartComponent,canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'checkout', component: OrderComponent,canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'myProfile', component: MyProfileComponent,canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_USER' }},
+  { path: 'editBook/:id', component: EditBookComponent,canActivate: [RoleGuard],
+  data: { expectedRole: 'ROLE_ADMIN' }},
 
 ];
 

@@ -1,0 +1,29 @@
+.background {
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(201, 176, 224);
+    z-index: -1;
+  }
+  
+  .container{
+      width: 90%;
+      margin: auto;
+    }
+    
+    mat-form-field{
+      width: 100%;
+    }
+    
+    mat-select{
+      width: 100%;
+    }
+    
+    mat-slide-toggle{
+      width: 100%;
+    }
+  
+  
+  

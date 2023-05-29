@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {BookService} from '../../services/book.service';
 import {Book} from '../../models/Book';
 import {NavigationExtras, Router} from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,20 +14,16 @@ export class NavBarComponent implements OnInit {
   private loggedIn = false;
   public keyword: string = "";
   private bookList: Book[] = [];
+  authService: any;
 
-  constructor(private bookService: BookService, private router: Router) { }
+  constructor(private bookService: BookService, private router: Router, private authS:AuthService) { }
 
   logout() {
-    // this.loginService.logout().subscribe(
-    //   res => {
-    //     location.reload();
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
+    this.authS.logout();
+    window.location.href = '/login'; // This will navigate to the login page
   }
-
+  
+  
   onSearchByTitle() {
     this.bookService.search(this.keyword).subscribe(
       res => {
@@ -46,14 +43,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loginService.checkSessoin().subscribe(
-    //   res => {
-    //     this.loggedIn = true;
-    //   },
-    //   error => {
-    //     this.loggedIn = false;
-    //   }
-    // );
+
   }
 
 }

@@ -42,6 +42,11 @@ import { ShippingService } from './services/shipping.service';
 import { MatCardModule } from '@angular/material/card';
 import { DialogContent, MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; // add this line
+import { AuthService } from './services/auth.service';
+import { EditBookService } from './services/edit-book.service';
+import { GetBookService } from './services/get-book.service';
+import { ViewComponent } from './components/view-book-admin/view.component';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
 
 // import { MatTabsModule } from '@angular/material/tabs';
 
@@ -63,7 +68,9 @@ import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; /
       OrderComponent,
       MyProfileComponent,
       DialogContentExampleDialog,
-      DialogContent
+      DialogContent,
+      ViewComponent,
+      EditBookComponent
       // MatTabsModule
       // UserShippingComponent,
   ],
@@ -86,7 +93,7 @@ import { MatDialogContent, MatDialogActions } from '@angular/material/dialog'; /
     MaterialModule
   ],
   providers: [UserService, BookService,BookListService, RemoveBookService,UploadImageService,AddBookService,CartService,
-              CheckoutService, PaymentService, ShippingService],
+              CheckoutService, PaymentService, ShippingService,AuthService,EditBookService,GetBookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
