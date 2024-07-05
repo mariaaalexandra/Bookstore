@@ -26,3 +26,9 @@ The Spring Boot Server will export API at port `8081`.
 npm install
 ng serve --port 8081
 ```
+
+![image](https://github.com/mariaaalexandra/Bookstore/assets/88377356/88cdb25e-5935-4304-a631-403b2212dd67)
+
+![image](https://github.com/mariaaalexandra/Bookstore/assets/88377356/fd247b5a-2638-4e72-b7a6-4bdc90423d98)
+
+
