@@ -31,4 +31,5 @@ ng serve --port 8081
 
 ![image](https://github.com/mariaaalexandra/Bookstore/assets/88377356/fd247b5a-2638-4e72-b7a6-4bdc90423d98)
 
+![image](https://github.com/mariaaalexandra/Bookstore/assets/88377356/dc1e06dc-8a08-4df6-bf3f-cba9479b45c6)
 
